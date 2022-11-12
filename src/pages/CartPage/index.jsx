@@ -6,6 +6,7 @@ import { deleteProduct, getProduct, updateProduct } from "../../redux/productCar
 // import Context from "../../context/Context";
 // import { addCount, deleteCount, subtractCount } from "../../store/actions";
 import formatMoney from "../../utils/utils";
+import { Link } from "react-router-dom";
 
 const CartPage = () => {
   const dispatch = useDispatch();
@@ -116,9 +117,9 @@ const CartPage = () => {
                     {formatMoney(totalMoneyProductCart)}
                   </p>
                 </div>
-                <a href="./checkout.html">
+                <Link to="/checkout-page">
                   <button className="order-pay-button">Thanh Toán</button>
-                </a>
+                </Link>
               </div>
             </div>
           </div>

@@ -46,11 +46,11 @@ const usersSlice = createSlice({
       let index = state.users.findIndex(
         (p) => p.id === action.payload.id
       );
-      state.productCart[index] = action.payload;
+      state.users[index] = action.payload;
     });
     builder.addCase(deleteUsers.fulfilled, (state, action) => {
       let index = state.users.findIndex((p) => p.id === action.payload);
-      state.productCart.splice(index, 1);
+      state.users.splice(index, 1);
     });
   },
 });

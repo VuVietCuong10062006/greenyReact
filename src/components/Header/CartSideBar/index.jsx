@@ -1,12 +1,14 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./CartSideBar.css";
 import productApi from "../../../api/productApi";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteProduct, getProduct, updateProduct } from "../../../redux/productCartSlice";
+import {
+  deleteProduct,
+  getProduct,
+  updateProduct,
+} from "../../../redux/productCartSlice";
 
-// import Context from "../../../context/Context";
 import { Link } from "react-router-dom";
-// import { addCount, deleteCount, subtractCount } from "../../../store/actions";
 import formatMoney from "../../../utils/utils";
 
 const CartSideBar = ({
@@ -14,7 +16,6 @@ const CartSideBar = ({
   onCloseCartSideBar,
   handleCheckout,
 }) => {
-  // const { productCartItem, dispatchProducCart } = useContext(Context);
   const productCart = useSelector((state) => state.productCart.productCart);
   const dispatch = useDispatch();
 
@@ -27,20 +28,17 @@ const CartSideBar = ({
   const handleAddCountProductCart = (product) => {
     let productUpdate = { ...product, count: product.count + 1 };
     dispatch(updateProduct(productUpdate));
-    // dispatchProducCart(addCount(id));
   };
 
   const handleSubtractCountProductCart = (product) => {
-    if(product.count > 1){
-        let productUpdate = { ...product,count: product.count - 1 };
-        dispatch(updateProduct(productUpdate));
+    if (product.count > 1) {
+      let productUpdate = { ...product, count: product.count - 1 };
+      dispatch(updateProduct(productUpdate));
     }
-    // dispatchProducCart(subtractCount(id));
   };
 
   const handleDeleteProductCart = (id) => {
-    dispatch(deleteProduct(id))
-    // dispatchProducCart(deleteCount(id));
+    dispatch(deleteProduct(id));
   };
 
   const totalMoneyProductCart = productCart.reduce((total, p) => {

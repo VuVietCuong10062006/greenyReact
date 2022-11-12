@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import "./Shop.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getProduct, addProduct } from "../../../redux/productCartSlice";
-import {} from "react-redux";
 import productApi from "../../../api/productApi";
 import formatMoney from "../../../utils/utils";
 import { toast, ToastContainer } from "react-toastify";
 import { Link } from "react-router-dom";
+import Pagination from "../../../components/Panigation/Panigation";
+import { isEmpty } from "../../../utils/utils";
 
 const Shop = () => {
-  
   const [ratings, setRatings] = useState([]);
   const [tags, setTags] = useState([]);
   const [categorys, setCategorys] = useState([]);
@@ -22,6 +22,11 @@ const Shop = () => {
   const [checkedRating, setCheckedRating] = useState();
   const [typeSort, setTypeSort] = useState("");
   const [productRenderShop, setProductRenderShop] = useState([]);
+  const [currentTableData, setCurrentTableDatap] = useState([]);
+
+  let PageSize = 12;
+
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     dispatch(getProduct());
@@ -59,7 +64,9 @@ const Shop = () => {
         category: filter.category,
         rating: filter.rating,
       })
-      .then((data) => setProductRenderShop(data));
+      .then((data) => {
+        setProductRenderShop(data);
+      });
     setTypeSort(e.target.value);
   };
 
@@ -72,10 +79,23 @@ const Shop = () => {
         rating: filter.rating,
       })
       .then((data) => {
-        console.log(data);
         setProductRenderShop(data);
       });
-  }, [filter]);
+  }, [filter, typeSort]);
+
+  useEffect(() => {
+    if (!productRenderShop.length) {
+      return;
+    }
+    const firstPageIndex = (currentPage - 1) * PageSize;
+    const lastPageIndex = firstPageIndex + PageSize;
+    const pro = productRenderShop.slice(firstPageIndex, lastPageIndex);
+    setCurrentTableDatap(pro);
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }, [productRenderShop, currentPage]);
+
+  console.log(currentTableData);
 
   const handleChangetag = (e) => {
     let tagChange = e.target.value;
@@ -120,6 +140,10 @@ const Shop = () => {
     });
   };
 
+  // if(!currentTableData.length){
+  //   return
+  // }
+
   return (
     <>
       <ToastContainer />
@@ -128,9 +152,9 @@ const Shop = () => {
           <div className="row flex-wrap-reverse">
             <div className="col-lg-3 col-md-5">
               <div className="shop-widget-promo">
-                <a href="">
+                <Link to="/shop-page">
                   <img src="../public/image/banner/shop-promo.jpg" alt="" />
-                </a>
+                </Link>
               </div>
 
               <div className="shop-widget">
@@ -294,7 +318,7 @@ const Shop = () => {
               </div>
 
               <div className="shop-product-list row row-cols-2 row-cols-md-2 row-cols-lg-3 row-cols-xl-4">
-                {productRenderShop.map((product) => (
+                {currentTableData.map((product) => (
                   <div key={product.id} className="col">
                     <div className="product-card">
                       <div className="product-image">
@@ -374,20 +398,26 @@ const Shop = () => {
 
               <div className="shop-panigation row">
                 <div className="col-lg-12">
-                  <div className="shop-paginate">
+                  {/* <div className="shop-paginate">
                     <ul className="pagination">
                       <li className="pagination-item btn-prev">
                         <i className="fa-solid fa-arrow-left-long"></i>
                       </li>
                       <ul className="pagination-page-list">
-                        {/* <li className="pagination-item pagination-page">1
-                                      </li>  */}
+                        <li className="pagination-item pagination-page">1</li>
                       </ul>
                       <li className="pagination-item btn-next">
                         <i className="fa-solid fa-arrow-right-long"></i>
                       </li>
                     </ul>
-                  </div>
+                  </div> */}
+                  <Pagination
+                    className="pagination-bar"
+                    currentPage={currentPage}
+                    totalCount={productRenderShop.length}
+                    pageSize={PageSize}
+                    onPageChange={(page) => setCurrentPage(page)}
+                  ></Pagination>
                 </div>
               </div>
             </div>

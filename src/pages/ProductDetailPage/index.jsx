@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addProduct, getProduct } from "../../redux/productCartSlice";
 import productApi from "../../api/productApi";
 import { Link, useParams } from "react-router-dom";
-import { isEmpty } from "../../utils/utils";
+import formatMoney, { isEmpty } from "../../utils/utils";
 import { toast, ToastContainer } from "react-toastify";
 
 const ProductDetailPage = () => {
@@ -148,7 +148,7 @@ const ProductDetailPage = () => {
                   ></i>
                   {/* <a href="">(3 reviews)</a> */}
                 </div>
-                <h3 className="details-price">{productItem.price}</h3>
+                <h3 className="details-price">{formatMoney(productItem.price)}</h3>
                 <p className="details-desc">{productItem.description}</p>
                 <div className="details-button-group">
                   <button

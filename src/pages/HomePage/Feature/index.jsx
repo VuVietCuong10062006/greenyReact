@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import "./Feature.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getProduct, addProduct } from "../../../redux/productCartSlice";
@@ -7,6 +7,7 @@ import { useState } from "react";
 import productApi from "../../../api/productApi";
 import formatMoney from "../../../utils/utils";
 import { toast, ToastContainer } from "react-toastify";
+import ModalLayout from "../../../components/Modal";
 
 const Feature = () => {
   const [productFeatures, setProductFeature] = useState([]);
@@ -56,10 +57,18 @@ const Feature = () => {
     toast.success("thêm vào giỏ hàng thành công", {
       position: toast.POSITION.TOP_CENTER,
     });
-  };
+  };  
+  // const [isShowModal, setIsShowModal] = useState(false)
+  // const modalRef = useRef()
+  const handleClickVideo = (id) => {
+    console.log(id)
+  }
 
   return (
     <>
+    {/* <ModalLayout isShow={isShowModal} ref={modalRef} >
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates esse eaque aliquam soluta quidem id.</p>
+    </ModalLayout> */}
       <section className="feature">
         <div className="container">
           <div className="row">
@@ -85,9 +94,9 @@ const Feature = () => {
                       <img src={product.images[0]} alt="" />
                     </Link>
                     <div className="feature-widget">
-                      <Link to="/" className="feature-video">
+                      <div onClick={() => handleClickVideo(product.id)} className="feature-video">
                         <i className="fa-solid fa-play"></i>
-                      </Link>
+                      </div>
                       <Link to={`/${product.id}`} className="feature-view">
                         <i className="fa-solid fa-eye"></i>
                       </Link>

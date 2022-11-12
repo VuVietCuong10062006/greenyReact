@@ -14,26 +14,26 @@ const Footer = () => {
       <div className="row">
         <div className="col-sm-6 col-lg-3 col-xl-3 mb-4">
           <div className="footer-widget">
-            <a className="footer-logo" href="">
+            <Link className="footer-logo" to="/">
               <img src={logo} alt=""/>
-            </a>
+            </Link>
             <p>Tên công ty: CÔNG TY CỔ PHẦN ĐẦU TƯ GREENY</p>
             <p>Mã Số thuế: 0311428380</p>
             <ul className="footer-social">
               <li>
-                <a href="https://www.facebook.com/"><i className="fa-brands fa-facebook"></i></a>
+                <a href="https://www.facebook.com/" target="_blank"><i className="fa-brands fa-facebook"></i></a>
               </li>
               <li>
-                <a href="https://twitter.com/"><i className="fa-brands fa-twitter"></i></a>
+                <a href="https://twitter.com/" target="_blank"><i className="fa-brands fa-twitter"></i></a>
               </li>
               <li>
-                <a href="https://www.linkedin.com/"><i className="fa-brands fa-linkedin"></i></a>
+                <a href="https://www.linkedin.com/" target="_blank"><i className="fa-brands fa-linkedin"></i></a>
               </li>
               <li>
-                <a href="https://www.instagram.com/"><i className="fa-brands fa-instagram"></i></a>
+                <a href="https://www.instagram.com/" target="_blank"><i className="fa-brands fa-instagram"></i></a>
               </li>
               <li>
-                <a href="https://www.pinterest.com/"><i className="fa-brands fa-pinterest-p"></i></a>
+                <a href="https://www.pinterest.com/" target="_blank"><i className="fa-brands fa-pinterest-p"></i></a>
               </li>
             </ul>
           </div>
@@ -62,11 +62,11 @@ const Footer = () => {
         <div className="col-sm-6 col-lg-3 col-xl-3 mb-4">
           <div className="footer-links">
             <h3 className="footer-title">Đường Dẫn Nhanh</h3>
-            <a href="./index.html">Trang Chủ</a>
-            <a href="./page/shop.html">Sản Phẩm</a>
-            <a href="./page/blog.html">Tin Tức</a>
-            <a href="./page/contact.html">Liên Hệ</a>
-            <a href="./page/about.html">Giới Thiệu</a>
+            <Link to="/">Trang Chủ</Link>
+            <Link to="shop-page">Sản Phẩm</Link>
+            <Link to="blog-page">Tin Tức</Link>
+            <Link to="contact-page">Liên Hệ</Link>
+            <Link to="about-page">Giới Thiệu</Link>
           </div>
         </div>
         <div className="col-sm-6 col-lg-3 col-xl-3 mb-4">
